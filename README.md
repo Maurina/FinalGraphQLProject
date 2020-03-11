@@ -9,7 +9,7 @@ This example shows how to implement an **GraphQL server (SDL-first) with Node.js
 Clone this repository:
 
 ```
-git clone https://github.com/thortek/dgm4790-graphql-server
+git clone https://github.com/Maurina/FinalGraphQLProject
 ```
 
 Install npm dependencies:
@@ -44,13 +44,10 @@ query {
   feed {
     id
     title
-    content
+    description
     published
-    author {
-      id
-      name
-      email
-    }
+    imageUrl
+    date
   }
 }
 ```

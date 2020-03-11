@@ -9,6 +9,7 @@ const Data = objectType({
     t.model.title()
     t.model.description()
     t.model.imageUrl()
+    t.model.date()
   }
 })
 

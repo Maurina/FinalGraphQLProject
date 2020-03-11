@@ -14,4 +14,5 @@ model Course {
   title          String
   description    String
   imageUrl       String
+  date           String
 }

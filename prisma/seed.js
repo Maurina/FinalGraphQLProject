@@ -9,8 +9,7 @@ async function createData() {
         title: 'Earth and ',
         description: 'Earth and moon',
         imageUrl: 'image here',
-        courseCode: 'DGM 4790',
-        termsOffered: 'Spring'
+        date: '2006'
       },
     })
   } catch (err) {
