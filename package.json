@@ -28,5 +28,10 @@
   },
   "engines": {
     "node": ">=10.0.0"
-  }
+  },
+  "description": "This example shows how to implement an **GraphQL server (SDL-first) with Node.js** based on [Prisma Client](https://github.com/prisma/prisma2/blob/master/docs/prisma-client-js/api.md), [apollo-server](https://www.npmjs.com/package/apollo-server) and the [nexus-prisma](https://github.com/prisma-labs/nexus-prisma) plugin. It is based on a PostGreSQL database running inside Docker.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }

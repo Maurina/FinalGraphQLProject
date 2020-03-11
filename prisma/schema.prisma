@@ -1,6 +1,6 @@
 datasource db {
   provider = "postgresql"
-  url = "***"
+  url      = "postgresql://postgres:docker@localhost:5432/pg-docker?schema=public"
 }
 
 generator client {
@@ -11,8 +11,9 @@ model Course {
   id             String   @default(cuid()) @id
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
-  title          String
+  name           String
   description    String
-  imageURL       String
-  date           String
+  defaultCredits String
+  courseCode     String
+  termsOffered   String
 }
