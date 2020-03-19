@@ -3,12 +3,13 @@
 
 
 type Nasa {
-  defaultCredits: String!
   description: String!
   id: String!
   title: String!
-  date: String!
-  imageUrl: String
+  dateCreated: String!
+  image: String
+  source: String
+  keywords: String
 }
 
 scalar DateTime

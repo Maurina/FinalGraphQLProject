@@ -13,6 +13,8 @@ model Course {
   updatedAt      DateTime @updatedAt
   title          String
   description    String
-  imageUrl       String
-  date           String
+  image          String
+  dateCreated    String
+  source         String
+  keywords       String
 }

@@ -15,7 +15,7 @@ export const Query = queryType({
       }
     })
 
-    t.list.field('Datas', {
+    t.list.field('Data', {
       type: 'Data',
       args: {
         searchString: stringArg({ nullable: true}),
@@ -25,7 +25,9 @@ export const Query = queryType({
           where: {
             OR: [
               { title: { contains: searchString }},
-              { description: { contains: searchString }}
+              { description: { contains: searchString }},
+              {keywords: {contains: searchString}},
+              {source: {contains: searchString}}
             ],
           },
         })

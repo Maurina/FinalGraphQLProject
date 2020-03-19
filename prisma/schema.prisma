@@ -7,10 +7,12 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Course {
+model Nasa {
   id             String   @default(cuid()) @id
   title          String
   description    String
-  date           String
-  imageUrl       String
+  dateCreated    String
+  image          String
+  keywords       String
+  source         String
 }
