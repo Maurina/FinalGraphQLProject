@@ -2,20 +2,18 @@
 ### Do not make changes to this file directly
 
 
-type Course {
-  courseCode: String!
-  createdAt: DateTime!
+type Nasa {
   defaultCredits: String!
   description: String!
   id: String!
-  name: String!
-  termsOffered: String!
-  updatedAt: DateTime!
+  title: String!
+  date: String!
+  imageUrl: String
 }
 
 scalar DateTime
 
 type Query {
-  Course(id: ID): Course
-  Courses(searchString: String): [Course!]!
+  Nasa(id: ID): Nasa
+  Nasa(searchString: String): [Nasa!]!
 }

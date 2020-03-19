@@ -9,11 +9,8 @@ generator client {
 
 model Course {
   id             String   @default(cuid()) @id
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  name           String
+  title          String
   description    String
-  defaultCredits String
-  courseCode     String
-  termsOffered   String
+  date           String
+  imageUrl       String
 }
