@@ -1,38 +1,27 @@
 import { PrismaClient } from '@prisma/client'
 
+
 const prismaClient = new PrismaClient()
 
-const uvu_courses = fs.readFileSync('prisma/example_files/uvu_courses.json')
-
-function loadNasaData() {
-  const Nasa = JSON.parse(nasa)
-  const allNasa = Nasa.nasaDataSets
-
-    return {
-      data: {
-        title: crs.title._text,
-        description: crs.description._text,
-        image: crs.image._text,
-        source: crs.source._text,
-        keywords: crs.keywords._text || "None",
-        dateCreated: crs.dateCreated._text
-      },
-  }
-}
-
-async function main() {
+async function createNasaData() {
   try {
-    const allNasa = loadNasaData()
-    for (let crs of allNasa) {
-      await prismaClient.course.create(crs)
-      .catch(err => console.log(`Error trying to create Nasa Data: ${err} data ${crs}`))
-    }
+    await prismaClient.card.create({
+      data: {
+        title: "Earth and Moon",
+        description: "During its flight, NASA\u2019s Galileo spacecraft returned images of the Earth and Moon. Separate images of the Earth and Moon were combined to generate this view. ",
+        image: "http://images-assets.nasa.gov/image/PIA00342/PIA00342~orig.jpg",
+        source: "NASA/JPL/USGS",
+        dateCreated: "1998:06:04 18:10:28",
+        keywords: ["Earth", "Galileo"]
+      },
+    })
   } catch (err) {
     console.log(err)
   }
-}
+} 
 
-main()
+
+createNasaData()
   .catch(e => console.error(e))
   .finally(async () => {
     await prismaClient.disconnect()
