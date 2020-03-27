@@ -19,48 +19,73 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  CardWhereUniqueInput: { // input type
+    id?: string | null; // String
+  }
 }
 
 export interface NexusGenEnums {
 }
 
 export interface NexusGenRootTypes {
-  Course: prisma.Course;
+  Card: prisma.Card;
+  Mutation: {};
   Query: {};
   String: string;
   Int: number;
   Float: number;
   Boolean: boolean;
   ID: string;
-  DateTime: any;
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  CardWhereUniqueInput: NexusGenInputs['CardWhereUniqueInput'];
 }
 
 export interface NexusGenFieldTypes {
-  Course: { // field return type
-    courseCode: string; // String!
-    createdAt: any; // DateTime!
-    defaultCredits: string; // String!
+  Card: { // field return type
     description: string; // String!
     id: string; // String!
-    name: string; // String!
-    termsOffered: string; // String!
-    updatedAt: any; // DateTime!
+    image: string; // String!
+    keywords: string; // String!
+    source: string; // String!
+    title: string; // String!
+  }
+  Mutation: { // field return type
+    createCard: NexusGenRootTypes['Card']; // Card!
+    deleteOneCard: NexusGenRootTypes['Card'] | null; // Card
+    updateCard: NexusGenRootTypes['Card']; // Card!
   }
   Query: { // field return type
-    Course: NexusGenRootTypes['Course'] | null; // Course
-    Courses: NexusGenRootTypes['Course'][]; // [Course!]!
+    Card: NexusGenRootTypes['Card'][]; // [Card!]!
   }
 }
 
 export interface NexusGenArgTypes {
-  Query: {
-    Course: { // args
-      id?: string | null; // ID
+  Mutation: {
+    createCard: { // args
+      date?: string | null; // String
+      description?: string | null; // String
+      image?: string | null; // String
+      keyword?: string | null; // String
+      source?: string | null; // String
+      title: string; // String!
     }
-    Courses: { // args
+    deleteOneCard: { // args
+      where: NexusGenInputs['CardWhereUniqueInput']; // CardWhereUniqueInput!
+    }
+    updateCard: { // args
+      date?: string | null; // String
+      description?: string | null; // String
+      id?: string | null; // ID
+      image?: string | null; // String
+      keyword?: string | null; // String
+      name?: string | null; // String
+      source?: string | null; // String
+    }
+  }
+  Query: {
+    Card: { // args
       searchString?: string | null; // String
     }
   }
@@ -71,15 +96,15 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Course" | "Query";
+export type NexusGenObjectNames = "Card" | "Mutation" | "Query";
 
-export type NexusGenInputNames = never;
+export type NexusGenInputNames = "CardWhereUniqueInput";
 
 export type NexusGenEnumNames = never;
 
 export type NexusGenInterfaceNames = never;
 
-export type NexusGenScalarNames = "Boolean" | "DateTime" | "Float" | "ID" | "Int" | "String";
+export type NexusGenScalarNames = "Boolean" | "Float" | "ID" | "Int" | "String";
 
 export type NexusGenUnionNames = never;
 

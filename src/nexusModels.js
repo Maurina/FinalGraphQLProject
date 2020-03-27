@@ -1,7 +1,7 @@
 import { objectType } from 'nexus'
 
-const Data = objectType({
-  name: 'Data',
+const Card = objectType({
+  name: 'Card',
   definition(t) {
     t.model.id()
     t.model.title()
@@ -14,5 +14,5 @@ const Data = objectType({
 })
 
 export const Models = [
-  Data
+  Card
 ]

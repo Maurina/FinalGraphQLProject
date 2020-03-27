@@ -2,12 +2,12 @@ import { idArg, queryType, stringArg } from 'nexus'
 
 export const Query = queryType({
   definition(t) {
-    t.field('Data', {
-      type: 'Data',
+    t.field('Card', {
+      type: 'Card',
       nullable: true,
       args: { id: idArg() },
       resolve: (parent, { id }, ctx) => {
-        return ctx.prisma.data.findOne({
+        return ctx.prisma.card.findOne({
           where: {
             id,
           },
@@ -15,13 +15,13 @@ export const Query = queryType({
       }
     })
 
-    t.list.field('Data', {
-      type: 'Data',
+    t.list.field('Card', {
+      type: 'Card',
       args: {
         searchString: stringArg({ nullable: true}),
       },
       resolve: (parent, { searchString }, ctx) => {
-        return ctx.prisma.data.findMany({
+        return ctx.prisma.card.findMany({
           where: {
             OR: [
               { title: { contains: searchString }},
@@ -33,6 +33,5 @@ export const Query = queryType({
         })
       }
     })
-
   }
 })

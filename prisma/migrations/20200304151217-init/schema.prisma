@@ -1,6 +1,6 @@
 datasource db {
   provider = "postgresql"
-  url = "***"
+  url = "postgresql://postgres:docker@localhost:5432/pg-docker-nasa?schema=public"
 }
 
 generator client {
@@ -9,12 +9,10 @@ generator client {
 
 model Card {
   id             String   @default(cuid()) @id
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
   title          String
   description    String
   image          String
-  dateCreated    String
+  date           String
   source         String
   keywords       String
 }

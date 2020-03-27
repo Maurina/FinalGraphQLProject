@@ -2,19 +2,25 @@
 ### Do not make changes to this file directly
 
 
-type Nasa {
+type Card {
   description: String!
   id: String!
+  image: String!
+  keywords: String!
+  source: String!
   title: String!
-  dateCreated: String!
-  image: String
-  source: String
-  keywords: String
 }
 
-scalar DateTime
+input CardWhereUniqueInput {
+  id: String
+}
+
+type Mutation {
+  createCard(date: String, description: String, image: String, keyword: String, source: String, title: String!): Card!
+  deleteOneCard(where: CardWhereUniqueInput!): Card
+  updateCard(date: String, description: String, id: ID, image: String, keyword: String, name: String, source: String): Card!
+}
 
 type Query {
-  Nasa(id: ID): Nasa
-  Nasa(searchString: String): [Nasa!]!
+  Card(searchString: String): [Card!]!
 }
