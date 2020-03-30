@@ -1,9 +1,37 @@
 import { PrismaClient } from '@prisma/client'
-
+import fs from 'fs'
 
 const prismaClient = new PrismaClient()
 
-async function createCard() {
+const nasa_card = fs.readFileSync('prisma/example_files/nasa.json')
+
+function loadCard() {
+  const cardInfo = JSON.parse(nasa_card)
+  const allCardInfo = cardInfo.nasaDataSets
+  return allCardInfo
+}
+
+async function main() {
+  try{
+    const allCardInfo = loadCard()
+    for (let crs of allCardInfo){
+      await prismaClient.card.create(crs)
+      .catch(err => console.log(`Error trying to create UVU courses: ${err} course ${crs}`))
+    }
+  }
+  catch (err) {
+    console.log(err)
+  }
+}
+
+main()
+  .catch(e => console.error(e))
+  .finally(async () => {
+    await prismaClient.disconnect()
+  })
+
+
+/* async function createCard() {
   try {
     await prismaClient.Card.create({
       ctx: {
@@ -19,10 +47,5 @@ async function createCard() {
     console.log(err)
   }
 } 
+ */
 
-
-createCard()
-  .catch(e => console.error(e))
-  .finally(async () => {
-    await prismaClient.disconnect()
-  })
