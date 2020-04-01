@@ -26,7 +26,6 @@ export const Query = queryType({
             OR: [
               { title: { contains: searchString }},
               { description: { contains: searchString }},
-              {keywords: {contains: searchString}},
               {source: {contains: searchString}}
             ],
           },

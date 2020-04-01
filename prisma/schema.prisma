@@ -11,8 +11,5 @@ model Card {
   id             String   @default(cuid()) @id
   title          String
   description    String
-  date           String
-  image          String
-  keywords       String
   source         String
 }

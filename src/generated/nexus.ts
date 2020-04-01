@@ -46,8 +46,6 @@ export interface NexusGenFieldTypes {
   Card: { // field return type
     description: string; // String!
     id: string; // String!
-    image: string; // String!
-    keywords: string; // String!
     source: string; // String!
     title: string; // String!
   }
@@ -64,10 +62,7 @@ export interface NexusGenFieldTypes {
 export interface NexusGenArgTypes {
   Mutation: {
     createCard: { // args
-      date?: string | null; // String
       description?: string | null; // String
-      image?: string | null; // String
-      keyword?: string | null; // String
       source?: string | null; // String
       title: string; // String!
     }
@@ -75,13 +70,10 @@ export interface NexusGenArgTypes {
       where: NexusGenInputs['CardWhereUniqueInput']; // CardWhereUniqueInput!
     }
     updateCard: { // args
-      date?: string | null; // String
       description?: string | null; // String
       id?: string | null; // ID
-      image?: string | null; // String
-      keyword?: string | null; // String
-      name?: string | null; // String
       source?: string | null; // String
+      title?: string | null; // String
     }
   }
   Query: {

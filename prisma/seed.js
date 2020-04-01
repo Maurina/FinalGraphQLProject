@@ -8,7 +8,20 @@ const nasa_card = fs.readFileSync('prisma/example_files/nasa.json')
 function loadCard() {
   const cardInfo = JSON.parse(nasa_card)
   const allCardInfo = cardInfo.nasaDataSets
-  return allCardInfo
+/*   console.log(allCardInfo) */
+  return allCardInfo.map(crs => {
+    return {
+    data: {
+    title: crs.title,
+    description: crs.description,
+    source: crs.source,
+    /* keywords: {
+      set: crs.keywords
+      }, */
+
+    },
+    }
+    })
 }
 
 async function main() {
@@ -16,7 +29,7 @@ async function main() {
     const allCardInfo = loadCard()
     for (let crs of allCardInfo){
       await prismaClient.card.create(crs)
-      .catch(err => console.log(`Error trying to create UVU courses: ${err} course ${crs}`))
+      .catch(err => console.log(`Error trying to create Nasa card: ${err} card ${crs}`))
     }
   }
   catch (err) {

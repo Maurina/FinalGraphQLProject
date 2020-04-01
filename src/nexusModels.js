@@ -6,10 +6,7 @@ const Card = objectType({
     t.model.id()
     t.model.title()
     t.model.description()
-    t.model.image()
-    t.model.dateCreated()
     t.model.source()
-    t.model.keywords()
   }
 })
 

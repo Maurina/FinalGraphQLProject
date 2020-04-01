@@ -5,8 +5,6 @@
 type Card {
   description: String!
   id: String!
-  image: String!
-  keywords: String!
   source: String!
   title: String!
 }
@@ -16,9 +14,9 @@ input CardWhereUniqueInput {
 }
 
 type Mutation {
-  createCard(date: String, description: String, image: String, keyword: String, source: String, title: String!): Card!
+  createCard(description: String, source: String, title: String!): Card!
   deleteOneCard(where: CardWhereUniqueInput!): Card
-  updateCard(date: String, description: String, id: ID, image: String, keyword: String, name: String, source: String): Card!
+  updateCard(description: String, id: ID, source: String, title: String): Card!
 }
 
 type Query {

@@ -11,20 +11,15 @@ export const Mutation = mutationType({
             args: {
                 title: stringArg({ nullable: false }),
                 description: stringArg(),
-                date: stringArg(),
-                image: stringArg(),
                 source: stringArg(),
-                keyword: stringArg(),
             },
-            resolve: (parent, { name, description, date, image, source, keyword }, ctx) => {
+            resolve: (parent, { title, description, source}, ctx) => {
                 return ctx.prisma.card.create({
                     data: {
-                        name,
+                        title,
                         description,
-                        date,
-                        image,
                         source,
-                        keyword
+                       
                     }
                 })
             }
@@ -33,25 +28,19 @@ export const Mutation = mutationType({
         t.field('updateCard', {
             type: 'Card',
             args: { id: idArg(),
-                name: stringArg(),
+                title: stringArg(),
                 description: stringArg(),
-                date: stringArg(),
-                image: stringArg(),
                 source: stringArg(),
-                keyword: stringArg()
             },
-            resolve: (parent, { id, name, description, date, image, source, keyword }, ctx) => {
+            resolve: (parent, { id, title, description, source }, ctx) => {
                 return ctx.prisma.course.update({
                     where: {
                         id
                     },
                     data: {
-                        name,
+                        title,
                         description,
-                        date,
-                        image,
                         source,
-                        keyword
                     }
                 })
             }
