@@ -3,10 +3,13 @@
 
 
 type Card {
-  description: String!
+  description: String
   id: String!
-  source: String!
+  source: String
   title: String!
+  keywords: String[]
+  dateCreated: String
+  image: String
 }
 
 input CardWhereUniqueInput {
@@ -14,9 +17,9 @@ input CardWhereUniqueInput {
 }
 
 type Mutation {
-  createCard(description: String, source: String, title: String!): Card!
+  createCard(description: String, source: String, title: String!, keywords: String[], dateCreated: String, image: String): Card!
   deleteOneCard(where: CardWhereUniqueInput!): Card
-  updateCard(description: String, id: ID, source: String, title: String): Card!
+  updateCard(description: String, id: ID, source: String, title: String, keywords: String[], dateCreated: String, image: String): Card!
 }
 
 type Query {

@@ -1,7 +1,7 @@
 {
   "name": "javascript-graphql",
   "scripts": {
-    "nuke": "docker stop pg-docker-nasa && docker del pg-docker-nasa && docker volume del pgdata && del -rf prisma/migrations",
+    "nuke": "docker stop pg-docker-nasa && docker rm pg-docker-nasa && docker volume rm pgdata && rm -rf prisma/migrations",
     "launchDocker": "docker run --name pg-docker-nasa -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v pgdata:/var/lib/postgresql/data postgres:latest",
     "createDB": "npx prisma2 migrate save --name 'init' --experimental && npx prisma2 migrate up --experimental",
     "generate": "npx prisma2 generate",

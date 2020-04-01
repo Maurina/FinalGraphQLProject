@@ -15,9 +15,10 @@ function loadCard() {
     title: crs.title,
     description: crs.description,
     source: crs.source,
-    /* keywords: {
+    dateCreated: crs.dateCreated,
+     keywords: {
       set: crs.keywords
-      }, */
+      }, 
 
     },
     }

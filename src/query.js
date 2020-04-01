@@ -32,5 +32,21 @@ export const Query = queryType({
         })
       }
     })
+
+    t.list.field('Card', {
+      type: 'Card',
+      args: {
+        searchString: stringArg({ nullable: true}),
+      },
+      resolve: (parent, { searchString }, ctx) => {
+        return ctx.prisma.card.findMany({
+          where: {
+            OR: [
+              { dateCreated: { contains: searchString }},
+            ],
+          },
+        })
+      }
+    })
   }
 })
