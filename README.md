@@ -1,3 +1,13 @@
+Prisma as your data modeling tool
+Docker-based PostgreSQL, as the data store
+At least 3 Query resolvers to get data from your server [Query](https://github.com/Maurina/FinalGraphQLProject/blob/master/src/query.js)
+At least 2 Mutation resolvers allowing users to create, update, or upsert an item. [Create and UpDate](https://github.com/Maurina/FinalGraphQLProject/blob/master/src/mutation.js)
+At least 1 Mutation resolver allowing users to delete an item. [Delete](https://github.com/Maurina/FinalGraphQLProject/blob/master/src/mutation.js)
+Your datastore will contain at least 25 items [Seed file](https://github.com/Maurina/FinalGraphQLProject/blob/master/prisma/seed.js)
+Your app will be deployable locally using Docker and will have seed data entered into the datastore.
+
+
+```
 # GraphQL Server Example (SDL-first)
 
 This example shows how to implement an **GraphQL server (SDL-first) with Node.js** based on [Prisma Client](https://github.com/prisma/prisma2/blob/master/docs/prisma-client-js/api.md), [apollo-server](https://www.npmjs.com/package/apollo-server) and the [nexus-prisma](https://github.com/prisma-labs/nexus-prisma) plugin. It is based on a PostGreSQL database running inside Docker.
@@ -14,7 +24,6 @@ git clone https://github.com/Maurina/FinalGraphQLProject
 
 Install npm dependencies:
 
-```
 cd graphql-sdl-first
 npm install
 ```
@@ -37,158 +46,78 @@ The schema that specifies the API operations of your GraphQL server is defined i
 
 Feel free to adjust any operation by adding or removing fields. The GraphQL Playground helps you with its auto-completion and query validation features.
 
-#### Retrieve all published posts and their authors
+#### Retrieve all cards
 
 ```graphql
 query {
-  feed {
+  card {
     id
     title
     description
-    published
-    imageUrl
-    date
+    source
+  }
+}
+```
+#### Search cards
+
+```graphql
+query {
+  card {
+    title
+    description
+    source
   }
 }
 ```
 
 <Details><Summary><strong>See more API operations</strong></Summary>
 
-#### Create a new user
+#### Create a new card
 
 ```graphql
 mutation {
-  signupUser(
+  createCard(
     data: {
-      name: "Sarah"
-      email: "sarah@prisma.io"
+      title: "Mars"
+      description: "Mars is the red planet."
+      source: "Nasa
     }
   ) {
     id
+    title
+    description
+    source
   }
 }
 ```
 
-#### Create a new draft
+#### Create a edit card
 
 ```graphql
 mutation {
-  createDraft(
-    title: "Join the Prisma Slack"
-    content: "https://slack.prisma.io"
-    authorEmail: "alice@prisma.io"
+  updateCard(
+    title: "Galaxy"
+    description: "Many stars and planets"
+    source: "Nasa"
   ) {
     id
-    published
+    title
   }
 }
 ```
 
-#### Publish an existing draft
+#### Delete an existing card
 
 ```graphql
 mutation {
-  publish(id: __POST_ID__) {
-    id
-    published
-  }
-}
-```
-
-> **Note**: You need to replace the `__POST_ID__`-placeholder with an actual `id` from a `Post` item. You can find one e.g. using the `filterPosts`-query.
-
-#### Search for posts with a specific title or content
-
-```graphql
-{
-  filterPosts(searchString: "graphql") {
-    id
-    title
-    content
-    published
-    author {
-      id
-      name
-      email
-    }
-  }
-}
-```
-
-#### Retrieve a single post
-
-```graphql
-{
-  post(where: { id: __POST_ID__ }) {
-    id
-    title
-    content
-    published
-    author {
-      id
-      name
-      email
-    }
-  }
-}
-```
-
-> **Note**: You need to replace the `__POST_ID__`-placeholder with an actual `id` from a `Post` item. You can find one e.g. using the `filterPosts`-query.
-
-#### Delete a post
-
-```graphql
-mutation {
-  deleteOnePost(where: {id: __POST_ID__})
+deleteOneCard (where: {id: __POST_ID__})
   {
     id
   }
 }
+}
+
 ```
-
-> **Note**: You need to replace the `__POST_ID__`-placeholder with an actual `id` from a `Post` item. You can find one e.g. using the `filterPosts`-query.
-
-</Details>
-
-
-
-## Evolving the app
-
-Evolving the application typically requires four subsequent steps:
-
-1. Migrating the database schema using SQL
-1. Update your Prisma schema by introspecting the database with `prisma2 introspect`
-1. Generating Prisma Client to match the new database schema with `prisma2 generate`
-1. Use the updated Prisma Client in your application code
-
-For the following example scenario, assume you want to add a "profile" feature to the app where users can create a profile and write a short bio about themselves.
-
-### 1. Change your database schema using SQL
-
-The first step would be to add a new table, e.g. called `Profile`, to the database. In SQLite, you can do so by running the following SQL statement:
-
-```sql
-CREATE TABLE "Profile" (
-  "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 
-  "bio" TEXT,
-  "user" TEXT NOT NULL UNIQUE REFERENCES "User"(id) ON DELETE SET NULL
-);
-```
-
-To run the SQL statement against the database, you can use the `sqlite3` CLI in your terminal, e.g.:
-
-```bash
-sqlite3 dev.db \
-'CREATE TABLE "Profile" (
-  "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 
-  "bio" TEXT,
-  "user" TEXT NOT NULL UNIQUE REFERENCES "User"(id) ON DELETE SET NULL
-);'
-```
-
-Note that we're adding a unique constraint to the foreign key on `user`, this means we're expressing a 1:1 relationship between `User` and `Profile`, i.e.: "one user has one profile".
-
-While your database now is already aware of the new table, you're not yet able to perform any operations against it using Prisma Client. The next two steps will update the Prisma Client API to include operations against the new `Profile` table.
 
 ### 2. Introspect your database
 
@@ -203,26 +132,11 @@ npx prisma2 introspect
 The `introspect` command updates your `schema.prisma` file. It now includes the `Profile` model and its 1:1 relation to `User`:
 
 ```prisma
-model Post {
-  author    User?
-  content   String?
-  id        Int     @id
-  published Boolean @default(false)
-  title     String
-}
-
-model User {
-  email   String   @unique
-  id      Int      @id
-  name    String?
-  post    Post[]
-  profile Profile?
-}
-
-model Profile {
-  bio  String?
-  id   Int     @id
-  user User
+model Card {
+  id             String   @default(cuid()) @id
+  title          String
+  description    String
+  source         String
 }
 ```
 
@@ -230,58 +144,6 @@ model Profile {
 
 With the updated Prisma schema, you can now also update the Prisma Client API with the following command:
 
-```
-npx prisma2 generate
-```
-
-This command updated the Prisma Client API in `node_modules/@prisma/client`.
-
-### 4. Use the updated Prisma Client in your application code
-
-You can now use your `PrismaClient` instance to perform operations against the new `Profile` table. Here are some examples:
-
-#### Create a new profile for an existing user
-
-```ts
-const profile = await prisma.profile.create({
-  data: {
-    bio: "Hello World",
-    user: {
-      connect: { email: "alice@prisma.io" }
-    }
-  },
-})
-```
-
-#### Create a new user with a new profile
-
-```ts
-const user = await prisma.user.create({
-  data: {
-    email: 'john@prisma.io',
-    name: 'John',
-    profile: {
-      create: { 
-        bio: "Hello World"
-      }
-    }
-  },
-})
-```
-
-#### Update the profile of an existing user
-
-```ts
-const userWithUpdatedProfile = await prisma.user.update({
-  where: { email: "alice@prisma.io" },
-  data: {
-    profile: {
-      update: {
-        bio: "Hello Friends"
-      }
-    }
-  }
-})
 ```
 
 ## Next steps
