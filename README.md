@@ -1,9 +1,15 @@
 Prisma as your data modeling tool
+
 Docker-based PostgreSQL, as the data store
+
 At least 3 Query resolvers to get data from your server [Query](https://github.com/Maurina/FinalGraphQLProject/blob/master/src/query.js)
+
 At least 2 Mutation resolvers allowing users to create, update, or upsert an item. [Create and UpDate](https://github.com/Maurina/FinalGraphQLProject/blob/master/src/mutation.js)
+
 At least 1 Mutation resolver allowing users to delete an item. [Delete](https://github.com/Maurina/FinalGraphQLProject/blob/master/src/mutation.js)
+
 Your datastore will contain at least 25 items [Seed file](https://github.com/Maurina/FinalGraphQLProject/blob/master/prisma/seed.js)
+
 Your app will be deployable locally using Docker and will have seed data entered into the datastore.
 
 
