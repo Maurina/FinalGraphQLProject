@@ -36,5 +36,6 @@ type Mutation {
 }
 
 type Query {
-  Card(searchString: String): [Card!]!
+  Card(id: ID): Card
+  Cards(searchString: String): [Card!]!
 }

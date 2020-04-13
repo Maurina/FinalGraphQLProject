@@ -71,7 +71,8 @@ export interface NexusGenFieldTypes {
     updateOneCard: NexusGenRootTypes['Card'] | null; // Card
   }
   Query: { // field return type
-    Card: NexusGenRootTypes['Card'][]; // [Card!]!
+    Card: NexusGenRootTypes['Card'] | null; // Card
+    Cards: NexusGenRootTypes['Card'][]; // [Card!]!
   }
 }
 
@@ -87,6 +88,9 @@ export interface NexusGenArgTypes {
   }
   Query: {
     Card: { // args
+      id?: string | null; // ID
+    }
+    Cards: { // args
       searchString?: string | null; // String
     }
   }
