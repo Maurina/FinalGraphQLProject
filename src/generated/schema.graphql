@@ -12,14 +12,27 @@ type Card {
   title: String!
 }
 
+input CardUpdateInput {
+  dateCreated: String
+  description: String
+  id: String
+  image: String
+  keywords: CardUpdatekeywordsInput
+  source: String
+  title: String
+}
+
+input CardUpdatekeywordsInput {
+  set: [String!]
+}
+
 input CardWhereUniqueInput {
   id: String
 }
 
 type Mutation {
-  createCard(description: String, source: String, title: String!): Card!
   deleteOneCard(where: CardWhereUniqueInput!): Card
-  updateCard(description: String, id: ID, source: String, title: String): Card!
+  updateOneCard(data: CardUpdateInput!, where: CardWhereUniqueInput!): Card
 }
 
 type Query {

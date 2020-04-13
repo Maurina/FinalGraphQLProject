@@ -8,8 +8,8 @@ export const Mutation = mutationType({
         t.crud.updateOneCard()
         t.crud.deleteOneCard()
 
-        
-       /*  t.field('createCard', {
+      /*   
+       t.field('createCard', {
             type: 'Card',
             args: {
                 title: stringArg({ nullable: false }),
@@ -47,6 +47,6 @@ export const Mutation = mutationType({
                     }
                 })
             }
-        })
+        }) */
     }
-}) */
+}) 
