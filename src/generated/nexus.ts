@@ -44,8 +44,11 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 
 export interface NexusGenFieldTypes {
   Card: { // field return type
+    dateCreated: string; // String!
     description: string; // String!
     id: string; // String!
+    image: string | null; // String
+    keywords: string[]; // [String!]!
     source: string; // String!
     title: string; // String!
   }
