@@ -30,11 +30,22 @@ git clone https://github.com/Maurina/FinalGraphQLProject
 
 Install npm dependencies:
 
-cd graphql-sdl-first
+cd FinalGraphQLProject
 npm install
 ```
 
 Note that this also generates Prisma Client JS into `node_modules/@prisma/client` via a `postinstall` hook of the `@prisma/client` package from your `package.json`.
+
+To start the project from scratch follow these steps
+
+```
+npm run launchDocker
+
+npm run createDB
+
+npm run seed
+
+```
 
 ### 2. Start the GraphQL server
 
@@ -55,7 +66,7 @@ Feel free to adjust any operation by adding or removing fields. The GraphQL Play
 #### Retrieve all cards
 
 ```graphql
-query {
+query allCards{
   card {
     id
     title
@@ -67,8 +78,8 @@ query {
 #### Search cards
 
 ```graphql
-query {
-  card {
+query searchCards {
+  cards {
     title
     description
     source
