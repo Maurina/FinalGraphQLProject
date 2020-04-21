@@ -12,6 +12,20 @@ type Card {
   title: String!
 }
 
+input CardCreateInput {
+  dateCreated: String!
+  description: String!
+  id: String
+  image: String
+  keywords: CardCreatekeywordsInput
+  source: String!
+  title: String!
+}
+
+input CardCreatekeywordsInput {
+  set: [String!]
+}
+
 input CardUpdateInput {
   dateCreated: String
   description: String
@@ -31,11 +45,15 @@ input CardWhereUniqueInput {
 }
 
 type Mutation {
+  createOneCard(data: CardCreateInput!): Card!
   deleteOneCard(where: CardWhereUniqueInput!): Card
   updateOneCard(data: CardUpdateInput!, where: CardWhereUniqueInput!): Card
 }
 
 type Query {
+  card(where: CardWhereUniqueInput!): Card
   Card(id: ID): Card
+  cards(after: CardWhereUniqueInput, before: CardWhereUniqueInput, first: Int, last: Int, skip: Int): [Card!]!
   Cards(searchString: String): [Card!]!
+  Source(searchString: String): [Card!]!
 }

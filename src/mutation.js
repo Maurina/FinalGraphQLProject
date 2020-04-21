@@ -1,4 +1,4 @@
-import { idArg, mutationType, stringArg } from 'nexus'
+import { idArg, mutationType, stringArg, intArg} from 'nexus'
 
 export const Mutation = mutationType({
     name: 'Mutation',
@@ -6,10 +6,10 @@ export const Mutation = mutationType({
 
         t.crud.deleteOneCard()
         t.crud.updateOneCard()
-        t.crud.deleteOneCard()
+        t.crud.createOneCard()
 
       
-       t.field('createCard', {
+      /*  t.field('createCard', {
             type: 'Card',
             args: {
                 title: stringArg({ nullable: false }),
@@ -26,9 +26,9 @@ export const Mutation = mutationType({
                     }
                 })
             }
-        })
+        }) */
 
-        t.field('updateCard', {
+      /*   t.field('updateCard', {
             type: 'Card',
             args: { id: idArg(),
                 title: stringArg(),
@@ -47,6 +47,6 @@ export const Mutation = mutationType({
                     }
                 })
             }
-        }) 
+        })  */
     }
 }) 

@@ -19,6 +19,18 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  CardCreateInput: { // input type
+    dateCreated: string; // String!
+    description: string; // String!
+    id?: string | null; // String
+    image?: string | null; // String
+    keywords?: NexusGenInputs['CardCreatekeywordsInput'] | null; // CardCreatekeywordsInput
+    source: string; // String!
+    title: string; // String!
+  }
+  CardCreatekeywordsInput: { // input type
+    set?: string[] | null; // [String!]
+  }
   CardUpdateInput: { // input type
     dateCreated?: string | null; // String
     description?: string | null; // String
@@ -51,6 +63,8 @@ export interface NexusGenRootTypes {
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  CardCreateInput: NexusGenInputs['CardCreateInput'];
+  CardCreatekeywordsInput: NexusGenInputs['CardCreatekeywordsInput'];
   CardUpdateInput: NexusGenInputs['CardUpdateInput'];
   CardUpdatekeywordsInput: NexusGenInputs['CardUpdatekeywordsInput'];
   CardWhereUniqueInput: NexusGenInputs['CardWhereUniqueInput'];
@@ -67,17 +81,24 @@ export interface NexusGenFieldTypes {
     title: string; // String!
   }
   Mutation: { // field return type
+    createOneCard: NexusGenRootTypes['Card']; // Card!
     deleteOneCard: NexusGenRootTypes['Card'] | null; // Card
     updateOneCard: NexusGenRootTypes['Card'] | null; // Card
   }
   Query: { // field return type
+    card: NexusGenRootTypes['Card'] | null; // Card
     Card: NexusGenRootTypes['Card'] | null; // Card
+    cards: NexusGenRootTypes['Card'][]; // [Card!]!
     Cards: NexusGenRootTypes['Card'][]; // [Card!]!
+    Source: NexusGenRootTypes['Card'][]; // [Card!]!
   }
 }
 
 export interface NexusGenArgTypes {
   Mutation: {
+    createOneCard: { // args
+      data: NexusGenInputs['CardCreateInput']; // CardCreateInput!
+    }
     deleteOneCard: { // args
       where: NexusGenInputs['CardWhereUniqueInput']; // CardWhereUniqueInput!
     }
@@ -87,10 +108,23 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    card: { // args
+      where: NexusGenInputs['CardWhereUniqueInput']; // CardWhereUniqueInput!
+    }
     Card: { // args
       id?: string | null; // ID
     }
+    cards: { // args
+      after?: NexusGenInputs['CardWhereUniqueInput'] | null; // CardWhereUniqueInput
+      before?: NexusGenInputs['CardWhereUniqueInput'] | null; // CardWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+      skip?: number | null; // Int
+    }
     Cards: { // args
+      searchString?: string | null; // String
+    }
+    Source: { // args
       searchString?: string | null; // String
     }
   }
@@ -103,7 +137,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "Card" | "Mutation" | "Query";
 
-export type NexusGenInputNames = "CardUpdateInput" | "CardUpdatekeywordsInput" | "CardWhereUniqueInput";
+export type NexusGenInputNames = "CardCreateInput" | "CardCreatekeywordsInput" | "CardUpdateInput" | "CardUpdatekeywordsInput" | "CardWhereUniqueInput";
 
 export type NexusGenEnumNames = never;
 
