@@ -25,7 +25,7 @@ git clone https://github.com/Maurina/FinalGraphQLProject
 ```
 
 Install npm dependencies:
-
+```
 cd FinalGraphQLProject
 npm install
 ```

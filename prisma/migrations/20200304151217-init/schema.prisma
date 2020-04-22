@@ -12,4 +12,7 @@ model Card {
   title          String
   description    String
   source         String
+  keywords       String[]
+  dateCreated    String
+  image          String?
 }
