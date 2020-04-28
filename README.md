@@ -107,7 +107,7 @@ query searchCardsID {
     source
   }
 }
-
+```
 <Details><Summary><strong>See more API operations</strong></Summary>
 
 #### Create a new card
